@@ -11,8 +11,10 @@ import ru.gb.springdemo.repository.BookRepository;
 import ru.gb.springdemo.repository.IssueRepository;
 import ru.gb.springdemo.repository.ReaderRepository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Objects;
 
 
 @Service
@@ -41,16 +43,31 @@ public class IssuerService {
     List<Issue> issueList = issueRepository.getIssues();
     int qty=0;
     for (Issue issue:issueList){
-     Reader currentReader = readerRepository.getReaderById(issue.getReaderId());
-     if (reader.equals(currentReader)) {
-       qty++;
-       if(qty>=maxQty)throw new IssueException("количество несданных книг читателя превышает допустимое");
-     }
+      if (issue.getReturnDate()!=null) {
+        Reader currentReader = readerRepository.getReaderById(issue.getReaderId());
+        if (reader.equals(currentReader)) {
+          qty++;
+          if (qty > maxQty) throw new IssueException("количество несданных книг читателя превышает допустимое");
+        }
+      }
     }
 
     Issue issue = new Issue(request.getBookId(), request.getReaderId());
     issueRepository.save(issue);
     return issue;
+  }
+  public Issue setReturnDate (long id){
+    List<Issue>issues = issueRepository.getIssues();
+    Issue issue = issues.stream().filter(it -> Objects.equals(it.getId(), id))
+            .findFirst()
+            .orElse(null);
+    if (issue == null) throw new NoSuchElementException ("Не найдена выдача с идентификатором \"" + id + "\"");
+    issue.setReturnDate(LocalDateTime.now());
+    return issue;
+  }
+
+  public List<Issue> getIssues (){
+    return issueRepository.getIssues();
   }
 
 }

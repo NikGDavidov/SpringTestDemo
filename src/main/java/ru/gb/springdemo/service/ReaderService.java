@@ -40,4 +40,11 @@ public class ReaderService {
     public List<Issue> getIssues(long id){
    return issueRepository.getIssues().stream().filter(it ->Objects.equals((it.getReaderId()),id)).toList();
     }
+
+    public List<Reader> getReaders(){
+        return readerRepository.getReaders();
+    }
+
+
+
 }

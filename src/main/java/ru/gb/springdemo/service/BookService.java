@@ -6,7 +6,9 @@ import org.springframework.stereotype.Service;
 import ru.gb.springdemo.api.BookRequest;
 import ru.gb.springdemo.model.Book;
 import ru.gb.springdemo.repository.BookRepository;
+import ru.gb.springdemo.repository.IssueRepository;
 
+import java.util.List;
 import java.util.NoSuchElementException;
 
 @Service
@@ -30,5 +32,8 @@ public class BookService {
         Book book = new Book(request.getName());
         bookRepository.save(book);
         return book;
+    }
+    public List<Book> getBooks(){
+        return bookRepository.getBooks();
     }
 }

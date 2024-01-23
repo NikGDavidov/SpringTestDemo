@@ -23,4 +23,5 @@ public class IssueRepository {
   public List<Issue> getIssues() {
     return issues;
   }
+
 }

@@ -38,7 +38,6 @@ public class ReaderController {
                 : new ResponseEntity<>(HttpStatus.NOT_MODIFIED);
     }
 
-
     @PostMapping
     ResponseEntity<Reader> addReader(@RequestBody ReaderRequest request) {
         final Reader reader;
@@ -55,7 +54,9 @@ public class ReaderController {
     @GetMapping("{id}/issue")
     public List<Issue> readerIssues(@PathVariable long id) {
         return service.getIssues(id);
-
     }
+
+
+
 }
 

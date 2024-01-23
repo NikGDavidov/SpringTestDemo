@@ -21,6 +21,7 @@ public class Issue {
    * Дата выдачи
    */
   private final LocalDateTime timestamp;
+  private LocalDateTime returnDate;
 
   public Issue(long bookId, long readerId) {
     this.id = sequence++;
