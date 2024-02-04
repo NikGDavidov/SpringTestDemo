@@ -5,10 +5,9 @@ import org.springframework.stereotype.Service;
 import ru.gb.springdemo.api.ReaderRequest;
 import ru.gb.springdemo.model.Issue;
 import ru.gb.springdemo.model.Reader;
-import ru.gb.springdemo.repository.BookRepository;
 import ru.gb.springdemo.repository.IssueRepository;
+import ru.gb.springdemo.repository.JpaIssueRepository;
 import ru.gb.springdemo.repository.JpaReaderRepository;
-import ru.gb.springdemo.repository.ReaderRepository;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -18,9 +17,9 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class ReaderService {
-    // private final ReaderRepository readerRepository;
-    // private final BookRepository bookRepository;
+
     private  final JpaReaderRepository readerRepository;
+  //  private final JpaIssueRepository issueRepository;
     private final IssueRepository issueRepository;
     public Reader getById(long id) {
       //  Reader reader = readerRepository.getReaderById(id);

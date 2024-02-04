@@ -21,11 +21,6 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class IssuerService {
 
-  // спринг это все заинжектит
-/*private final BookRepository bookRepository;
-private final ReaderRepository readerRepository;
-private final IssueRepository issueRepository;
-*/
   private final JpaBookRepository bookRepository;
   private final JpaReaderRepository readerRepository;
   private final JpaIssueRepository issueRepository;
@@ -34,27 +29,27 @@ private final IssueRepository issueRepository;
   private int maxQty;
   public Issue issue(IssueRequest request) throws IssueException {
 
-  //  if (bookRepository.getBookById(request.getBookId()) == null)
+
     Optional<Book> findBook = bookRepository.findById(request.getBookId());
     if (findBook.isEmpty())
       throw new NoSuchElementException("Не найдена книга с идентификатором \"" + request.getBookId() + "\"");
 
-   // Reader reader = readerRepository.getReaderById(request.getReaderId());
+
     Optional<Reader> findReader = readerRepository.findById(request.getReaderId());
 
-    //if (reader == null) {
+
     if (findReader.isEmpty())
       throw new NoSuchElementException("Не найден читатель с идентификатором \"" + request.getReaderId() + "\"");
     Reader reader = findReader.get();
     // можно проверить, что у читателя нет книг на руках (или его лимит не превышает в Х книг)
     // * 2.1 В сервис IssueService добавить проверку, что у пользователя на руках нет книг. Если есть - не выдавать книгу
   // * (статус ответа - 409 Conflict)
-    //List<Issue> issueList = issueRepository.getIssues();
+
     List<Issue> issueList = issueRepository.findAll();
     int qty=0;
     for (Issue issue:issueList){
       if (issue.getReturnDate()!=null) {
-    //    Reader currentReader = readerRepository.getReaderById(issue.getReaderId());
+
         Reader currentReader = readerRepository.findById(issue.getReaderId()).get();
         if (reader.equals(currentReader)) {
           qty++;
@@ -68,7 +63,7 @@ private final IssueRepository issueRepository;
     return issue;
   }
   public Issue setReturnDate (long id){
-    //List<Issue>issues = issueRepository.getIssues();
+
     List<Issue>issues = issueRepository.findAll();
 
     Issue issue = issues.stream().filter(it -> Objects.equals(it.getId(), id))
@@ -80,7 +75,7 @@ private final IssueRepository issueRepository;
   }
 
   public List<Issue> getIssues (){
-    //return issueRepository.getIssues();
+
     return issueRepository.findAll();
   }
 

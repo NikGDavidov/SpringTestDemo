@@ -14,24 +14,24 @@ import java.util.Optional;
 @Service
 @RequiredArgsConstructor
 public class BookService {
-  //  private final BookRepository bookRepository;
+
     private final JpaBookRepository bookRepository;
 
     public Book getById(long id) {
-   //     Book book = bookRepository.getBookById(id);
+
         Optional <Book> findBook = bookRepository.findById(id);
 
-    //    if (book == null) {
+
         if (findBook.isEmpty()){
             throw new NoSuchElementException("Не найдена книга с идентификатором \"" + id + "\"");
         }
-        // return book;
+
         return findBook.get();
     }
 
     public boolean deleteById(long id) {
 
-        //return bookRepository.deletetBookById(id);
+
        bookRepository.deleteById(id);
        return true;
     }
@@ -42,7 +42,6 @@ public class BookService {
         return book;
     }
     public List<Book> getBooks(){
-         //return bookRepository.getBooks();
         return bookRepository.findAll();
     }
 }
