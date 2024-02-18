@@ -1,7 +1,7 @@
 package ru.gb.springdemo.security;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+/*import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,8 +15,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
+*/
+
 @RequiredArgsConstructor
-public class CustomUserDetailsService implements UserDetailsService {
+public class CustomUserDetailsService {
+        /*implements UserDetailsService {
 
  private final UserRepository userRepository;
 
@@ -36,5 +39,5 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 
   }
-
+*/
 }

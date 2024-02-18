@@ -41,7 +41,7 @@ public class IssuerController {
 //возврат выдачи
   @PutMapping("/{id}")
   public ResponseEntity<Issue> returnBook(@PathVariable long id){
-    log.info("Получен запрос на выдачу: Id = {} " ,id);
+    log.info("Получен запрос на возвращение: Id = {} " ,id);
     Issue issue = null;
     try{
       issue = service.setReturnDate(id);
